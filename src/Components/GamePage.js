@@ -4,24 +4,24 @@ const GamePage = (props) => {
 
   const BOX = [
     {
-      name: "Flashy",
+      name: "Whity",
       pos: [
-        [400, 1480],
-        [480, 1540],
+        [785, 1190],
+        [810, 1215],
       ],
     },
     {
-      name: "Whity",
+      name: "Greenie",
       pos: [
-        [1345, 290],
-        [1405, 365],
+        [0.2, 0.53],
+        [0.264, 0.56],
       ],
     },
     {
       name: "Red Batman",
       pos: [
-        [990, 1665],
-        [1040, 1770],
+        [620, 880],
+        [670, 920],
       ],
     },
   ];
@@ -29,7 +29,7 @@ const GamePage = (props) => {
   return (
     <div className="gameImage">
       {/* <img src={process.env.PUBLIC_URL+img_src} alt="game image" onClick={clickCoord} /> */}
-      <ImageComponent img_src={img_src} box={BOX} />
+      <ImageComponent img_src={img_src} box={BOX}/>
     </div>
   );
 };
