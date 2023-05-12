@@ -30,10 +30,10 @@ const ImageComponent = (props) => {
     const charName = e.target.textContent;
     const clickPoint = clickPos;
     // console.log(e.target.textContent);
-    checkInBound(clickPoint, charName);
+    checkInBound(clickPoint, charName, e.target);
   };
 
-  const checkInBound = (clickPoint, charName) => {
+  const checkInBound = (clickPoint, charName, clickedBtn) => {
     const item = box.find((el) => el.name === charName);
     console.log(item.pos);
     const x = clickPoint[0];
@@ -45,10 +45,22 @@ const ImageComponent = (props) => {
     if ((x >= minX) & (x <= maxX) & (y >= minY) & (y <= maxY)) {
       console.log("You clicked the character!");
       changeHeadshotBorder(charName);
+      // disable button 
+      clickedBtn.disabled = true;
+      clickedBtn.classList.add('correct');
       setFoundItems(foundItems + 1);
-      console.log(foundItems);
+      // if clicked the right character, make the selection bar disappear
+      setTimeout(() => {
+        const selectCol = document.querySelector(".selectNameCol");
+        selectCol.style.display = "none";
+      }, 1200);
+
     } else {
       console.log("Nooooo");
+      clickedBtn.classList.add("wrong");
+      setTimeout(() => {
+        clickedBtn.classList.remove("wrong");
+      }, 300);
     }
   };
 
@@ -92,7 +104,7 @@ const ImageComponent = (props) => {
         alt="game image"
         onClick={clickCoord}
       />
-      {/* <div className="selectNameCol"> */}
+      <Timer foundItems={foundItems}/>
       <ul className="selectNameCol">
         <li>
           <button onClick={checkChar}>Whity</button>
@@ -104,7 +116,6 @@ const ImageComponent = (props) => {
           <button onClick={checkChar}>Batman</button>
         </li>
       </ul>
-      <Timer foundItems={foundItems}/>
     </div>
   );
 };
