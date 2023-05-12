@@ -83,10 +83,11 @@ li > button {
 }
 
 .headshot img {
+  box-sizing: border-box;
   max-width: 4em;
   min-width: 3.5em;
   border-radius: 5px;
-  border: 2px solid red;
+  border: 3px solid red;
 }
 
 .headshot p {

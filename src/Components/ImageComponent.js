@@ -1,9 +1,11 @@
 import { useState } from "react";
+import Timer from "./Timer";
 
 const ImageComponent = (props) => {
   const { img_src, box } = props; // local image first
 
   const [clickPos, setClickPos] = useState([0, 0]);
+  const [foundItems, setFoundItems] = useState(0);
 
   const clickCoord = (e) => {
     const clickX = e.pageX;
@@ -43,6 +45,8 @@ const ImageComponent = (props) => {
     if ((x >= minX) & (x <= maxX) & (y >= minY) & (y <= maxY)) {
       console.log("You clicked the character!");
       changeHeadshotBorder(charName);
+      setFoundItems(foundItems + 1);
+      console.log(foundItems);
     } else {
       console.log("Nooooo");
     }
@@ -51,7 +55,12 @@ const ImageComponent = (props) => {
   const changeHeadshotBorder = (charName) => {
     const headshots = document.querySelectorAll(".headshot");
     console.log(headshots);
-  }
+    headshots.forEach((hs) => {
+      if (hs.textContent === charName) {
+        hs.children[0].style.border = "3px solid green";
+      }
+    });
+  };
 
   return (
     <div className="image-container">
@@ -92,10 +101,10 @@ const ImageComponent = (props) => {
           <button onClick={checkChar}>Greenie</button>
         </li>
         <li>
-          <button onClick={checkChar}>Red Batman</button>
+          <button onClick={checkChar}>Batman</button>
         </li>
       </ul>
-      {/* </div> */}
+      <Timer foundItems={foundItems}/>
     </div>
   );
 };
