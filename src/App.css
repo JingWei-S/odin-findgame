@@ -63,10 +63,21 @@
   cursor: pointer;
 }
 
+.selectNameCol button:hover {
+  transform: scale(1.05); /* Example hover effect: increase scale by 10% */
+  background-color: #dddddd; /* Example hover effect: change background color */
+}
+
 .selectNameCol button.correct {
   background-color: #999999;
   border-color: #999999;
   animation: pulse 0.5s;
+}
+
+.selectNameCol button:disabled {
+  background-color: #999999;
+  border-color: #999999;
+  color: white;
 }
 
 .selectNameCol button.wrong {
