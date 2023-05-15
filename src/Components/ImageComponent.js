@@ -1,7 +1,8 @@
 import { useState } from "react";
 import Timer from "./Timer";
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 
 const ImageComponent = (props) => {
   const { img_src } = props; // local image first
@@ -27,26 +28,12 @@ const ImageComponent = (props) => {
 
   // Get a list of cities from your database
   async function getLoc(db) {
-    const imgOrd = 'img1';
+    const imgOrd = "img1";
     const charLoc = collection(db, imgOrd);
     const imgSnapshot = await getDocs(charLoc);
     const locList = imgSnapshot.docs.map((doc) => doc.data());
     return locList;
   }
-
-  // async function getLocations(db) {
-  //   try {
-  //     const locList = await getLoc(db);
-  //     // Handle the cityList data here
-  //     console.log(locList); // Example: Display the cityList in the console
-  //   } catch (error) {
-  //     // Handle any errors that occurred during the promise execution
-  //     console.error(error);
-  //   }
-  // }
-  
-  // // Call the function
-  // getLocations(db);
 
   const clickCoord = (e) => {
     const clickX = e.pageX;
@@ -76,9 +63,10 @@ const ImageComponent = (props) => {
 
   const checkInBound = async (clickPoint, charName, clickedBtn) => {
     const locList = await getLoc(db);
-    console.log(locList);
+  
+    // console.log(locList);
     const item = locList.find((el) => el.name === charName);
-    console.log(item.pos);
+    // console.log(item.pos);
     const x = clickPoint[0];
     const y = clickPoint[1];
     const minX = item.pos[0];
@@ -141,13 +129,13 @@ const ImageComponent = (props) => {
           <p>Batman</p>
         </div>
       </div>
-      <Timer foundItems={foundItems} />
+      <Timer foundItems={foundItems} db={db} />
       <img
         src={process.env.PUBLIC_URL + img_src}
         alt="game image"
         onClick={clickCoord}
       />
-      
+
       <ul className="selectNameCol">
         <li>
           <button onClick={checkChar}>Whity</button>

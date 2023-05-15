@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { doc, setDoc } from "firebase/firestore";
 
 const Timer = (props) => {
-  const { foundItems } = props;
+  const { foundItems, db } = props;
   const [isRunning, setIsRunning] = useState(true);
   const [elapsedTime, setElapsedTime] = useState(0);
 
@@ -23,12 +24,26 @@ const Timer = (props) => {
     // this is to stop the time
     if (foundItems === 3) {
       setIsRunning(false);
-    // TODO: add a function to send the data to backend
+      // TODO: add a function to send the data to backend
+      //   writeUserData("test", formatTime(elapsedTime));
+      (async () => {
+        const response = await setDoc(doc(db, "ranking", "img1"), {
+          name: "test",
+          time: elapsedTime,
+        });
+        console.log(response);
+      })();
     }
   }, [foundItems]);
   //   const stopTimer = () => {
   //     setIsRunning(false);
   //   };
+  // Add a new document in collection "cities"
+  //   await setDoc(doc(db, "cities", "LA"), {
+  //     name: "Los Angeles",
+  //     state: "CA",
+  //     country: "USA",
+  //   });
 
   const formatTime = (time) => {
     const hours = Math.floor(time / 3600);
