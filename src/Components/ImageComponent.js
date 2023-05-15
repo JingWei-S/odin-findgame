@@ -3,6 +3,7 @@ import Timer from "./Timer";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
+// require('dotenv').config();
 
 const ImageComponent = (props) => {
   const { img_src } = props; // local image first
@@ -11,15 +12,17 @@ const ImageComponent = (props) => {
   const [foundItems, setFoundItems] = useState(0);
 
   const firebaseConfig = {
-    apiKey: "AIzaSyBSVpc8n9IgK-MA4YKesynazYWVwsxCDyo",
-    authDomain: "dining-out-amuoii.firebaseapp.com",
-    databaseURL: "https://dining-out-amuoii.firebaseio.com",
-    projectId: "dining-out-amuoii",
-    storageBucket: "dining-out-amuoii.appspot.com",
-    messagingSenderId: "904353527588",
-    appId: "1:904353527588:web:475c6e1a9df0b011a825b1",
-    measurementId: "G-QTYLJ4BTNE",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
   };
+
+  console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
