@@ -3,13 +3,15 @@ import Timer from "./Timer";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
 import { doc, setDoc } from "firebase/firestore";
-// require('dotenv').config();
+
 
 const ImageComponent = (props) => {
-  const { img_src } = props; // local image first
+  const { img_src, isRunning, setIsRunning } = props; // local image first
 
   const [clickPos, setClickPos] = useState([0, 0]);
   const [foundItems, setFoundItems] = useState(0);
+
+  // console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
   const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -22,7 +24,7 @@ const ImageComponent = (props) => {
     measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
   };
 
-  console.log(process.env.REACT_APP_FIREBASE_API_KEY);
+  
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -41,19 +43,20 @@ const ImageComponent = (props) => {
   const clickCoord = (e) => {
     const clickX = e.pageX;
     const clickY = e.pageY;
-    const imgRefX = e.target.offsetLeft;
-    const imgRefY = e.target.offsetTop;
+    const imgRefX = e.target.parentNode.offsetLeft;
+    const imgRefY = e.target.parentNode.offsetTop;
     const imgWidth = e.target.offsetWidth;
     const imgHeight = e.target.offsetHeight;
     const scaleX = (clickX - imgRefX) / imgWidth;
     const scaleY = (clickY - imgRefY) / imgHeight;
-    console.log("Clicked position x: " + scaleX + ", y: " + scaleY);
+    console.log("Clicked position x: " + clickX + ", y: " + clickY);
+    console.log(imgRefX, imgRefY);
     // checkInBound(scaleX, scaleY);
     // get the name selection button column
     const selectCol = document.querySelector(".selectNameCol");
     selectCol.style.display = "flex";
-    selectCol.style.top = clickY + "px";
-    selectCol.style.left = clickX + "px";
+    selectCol.style.top = (clickY - imgRefY) + "px";
+    selectCol.style.left = (clickX - imgRefX) + "px";
     setClickPos([scaleX, scaleY]);
   };
 
@@ -109,30 +112,7 @@ const ImageComponent = (props) => {
 
   return (
     <div className="image-container">
-      <div className="headshot-conatiner">
-        <div className="headshot">
-          <img
-            src={process.env.PUBLIC_URL + "/img/head_whity.png"}
-            alt="whity"
-          />
-          <p>Whity</p>
-        </div>
-        <div className="headshot">
-          <img
-            src={process.env.PUBLIC_URL + "/img/head_greenie.png"}
-            alt="greenie"
-          />
-          <p>Greenie</p>
-        </div>
-        <div className="headshot">
-          <img
-            src={process.env.PUBLIC_URL + "/img/head_batman.png"}
-            alt="batman"
-          />
-          <p>Batman</p>
-        </div>
-      </div>
-      <Timer foundItems={foundItems} db={db} />
+      <Timer className='timer' foundItems={foundItems} db={db} isRunning={isRunning} setIsRunning={setIsRunning}/>
       <img
         src={process.env.PUBLIC_URL + img_src}
         alt="game image"

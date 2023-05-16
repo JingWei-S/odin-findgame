@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { doc, setDoc } from "firebase/firestore";
 
 const Timer = (props) => {
-  const { foundItems, db } = props;
-  const [isRunning, setIsRunning] = useState(true);
+  const { foundItems, db, isRunning, setIsRunning } = props;
   const [elapsedTime, setElapsedTime] = useState(0);
 
   useEffect(() => {

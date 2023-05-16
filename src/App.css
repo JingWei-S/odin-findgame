@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 
 .App-logo {
@@ -123,28 +124,42 @@ li>button {
 .gameImage {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 100%;
+  /* justify-content: center; */
+  width: 100vw;
+  flex-direction: column;
+  margin-bottom: 2em;
 }
 
 /* configure the image container size */
 .image-container {
   margin: 2em 10%;
   max-width: 80%;
-  display: flex;
+  display: none;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  position: relative;
+  top: 7em;
+  z-index: 1;
+  margin-bottom: 2em;
 }
 
 .image-container img {
   width: 95%;
+  margin-bottom: 2em;
 }
 
 .headshot-conatiner {
   display: flex;
   gap: 5em;
   flex: 1;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: white; /* New color: yellow */
+  padding: 20px; /* Increased padding for better spacing */
+  position: fixed;
+  z-index: 3;
 }
 
 .headshot img {
@@ -157,4 +172,47 @@ li>button {
 
 .headshot p {
   margin-top: 0;
+  margin-bottom: 0;
+}
+
+.timer {
+  position: fixed;
+  right: 8em;
+  padding: 8px;
+  background-color: #f7df1e; /* New color: yellow */
+  color: black;
+  font-family: Arial, sans-serif;
+  font-size: 16px; /* Increased font size for better visibility */
+  border-radius: 8px; /* Increased border radius for a rounded appearance */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+.starter {
+  background-color: #f7df1e; /* Yellow color */
+  color: #fff; /* White color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: relative;
+  top: calc(50vh - 20em);
+}
+
+.starter p {
+  margin-bottom: 10px;
+}
+
+.starter button {
+  background-color: #fff; /* White color */
+  color: #f7df1e; /* Yellow color */
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.starter button:hover {
+  background-color: #f7df1e; /* Yellow color */
+  color: #fff; /* White color */
 }

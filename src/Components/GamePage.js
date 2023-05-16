@@ -1,40 +1,27 @@
 import ImageComponent from "./ImageComponent";
-
-
+import { useState } from "react";
 
 const GamePage = (props) => {
   const { img_src } = props; // local image first
+  const [isRunning, setIsRunning] = useState(false);
+  const startGame = () => {
+    const startCard = document.querySelector('.starter');
+    startCard.style.display = 'none';
+    
+    const imgComponent = document.querySelector('.image-container');
+    imgComponent.style.display = 'flex';
 
-
-
-  // const BOX = [
-  //   {
-  //     name: "Whity",
-  //     pos: [
-  //       [0.714, 0.823],
-  //       [0.736, 0.840],
-  //     ],
-  //   },
-  //   {
-  //     name: "Greenie",
-  //     pos: [
-  //       [0.2, 0.53],
-  //       [0.264, 0.56],
-  //     ],
-  //   },
-  //   {
-  //     name: "Batman",
-  //     pos: [
-  //       [0.545, 0.606],
-  //       [0.599, 0.641],
-  //     ],
-  //   },
-  // ];
+    setIsRunning(true);
+  }
 
   return (
     <div className="gameImage">
-      {/* <img src={process.env.PUBLIC_URL+img_src} alt="game image" onClick={clickCoord} /> */}
-      <ImageComponent img_src={img_src}/>
+      <div className="starter">
+        <p>Wnat a challeng?</p>
+        <p>Select the three characters above as fast as you can!</p>
+        <button onClick={startGame}>Start Now</button>
+      </div>
+      <ImageComponent img_src={img_src} isRunning={isRunning} setIsRunning={setIsRunning}/>
     </div>
   );
 };
