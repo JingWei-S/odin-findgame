@@ -10,9 +10,15 @@ const Bar = () => {
   const getRanking = () => {
     const ranks = (async () => {
       const rankingSnapshot = await getDocs(collection(db, 'ranking'));
-      const rankList = rankingSnapshot.docs.map((doc) => doc.data());
+      let rankList = rankingSnapshot.docs.map((doc) => doc.data());
       console.log(rankList);
-      setTableData(rankList);
+      rankList.sort((a, b) => a.time - b.time);
+      if (rankList.length > 10) {
+        setTableData(rankList.slice(0, 10));
+      } else {
+        setTableData(rankList);
+      }
+      
     })();
     setPopupVisible(!isPopupVisible);
   }
@@ -39,7 +45,7 @@ const Bar = () => {
           />
           <p>Batman</p>
         </div>
-        <button onClick={getRanking}>Leaderboard</button>
+        <button onClick={getRanking} id="leaderboard">Leaderboard</button>
         
       </div>
       <RankingTable isPopupVisible={isPopupVisible} setPopupVisible={setPopupVisible} tableData={tableData}/>

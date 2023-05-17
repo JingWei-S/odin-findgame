@@ -132,6 +132,10 @@ const ImageComponent = (props) => {
         upload={upload}
       />
       <div className="enter-name">
+        <p onClick={() => {
+          const thisBar = document.querySelector('.enter-name');
+          thisBar.style.display = 'none';
+        }}>❌</p>
         <p>Congrats! You found all characters in {elapsedTime} seconds 😊</p>
         <input
           type="text"
@@ -142,6 +146,7 @@ const ImageComponent = (props) => {
         <button id="submit-user" onClick={getUserName}>
           Submit your records!
         </button>
+        <p>Check the leaderboard above ⬆️</p>
       </div>
       <img
         src={process.env.PUBLIC_URL + img_src}

@@ -23,14 +23,9 @@ const RankingTable = (props) => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Jing</td>
-                  <td>1</td>
-                </tr>
                 {tableData.map((row, index) => (
                   <tr key={index}>
-                    <td>1</td>
+                    <td>{index+1}</td>
                     <td>{row.name}</td>
                     <td>{row.time}</td>
                   </tr>

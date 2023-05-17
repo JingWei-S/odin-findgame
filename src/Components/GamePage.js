@@ -17,7 +17,7 @@ const GamePage = (props) => {
   return (
     <div className="gameImage">
       <div className="starter">
-        <p>Wnat a challeng?</p>
+        <p>Wnat a challenge?</p>
         <p>Select the three characters above as fast as you can!</p>
         <button onClick={startGame}>Start Now</button>
       </div>
