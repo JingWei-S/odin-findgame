@@ -279,3 +279,59 @@ li>button {
   opacity: 0.7;
   pointer-events: none; /* Disable pointer events on the button */
 }
+
+.container {
+  position: absolute;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.popup-content {
+  background-color: #ffffff;
+  padding: 1em;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-content p {
+  margin-left: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+.leader-table {
+  border-collapse: collapse;
+  width: 30em;
+}
+
+.leader-table th,
+.leader-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.leader-table th {
+  background-color: #f2f2f2;
+}

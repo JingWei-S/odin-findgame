@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Timer from "./Timer";
-import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "./firebase";
 
 const ImageComponent = (props) => {
