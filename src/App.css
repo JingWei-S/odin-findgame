@@ -216,3 +216,66 @@ li>button {
   background-color: #f7df1e; /* Yellow color */
   color: #fff; /* White color */
 }
+
+.enter-name {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: absolute; /* Position the div */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+
+.enter-name p {
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+.enter-name input[type="text"],
+.enter-name button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+
+
+
+.enter-name input[type="text"] {
+  margin-bottom: 10px;
+}
+
+.enter-name button {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.enter-name input[type="text"]::placeholder {
+  color: #999;
+}
+
+.enter-name button:hover {
+  background-color: #218838;
+}
+
+.enter-name button:active {
+  background-color: #1e7e34;
+}
+
+#submit-user.loading {
+  /* Styles for the button when it is in a loading state */
+  /* For example, you can add a spinner animation or change the button appearance */
+  opacity: 0.7;
+  pointer-events: none; /* Disable pointer events on the button */
+}

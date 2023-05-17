@@ -2,34 +2,34 @@ import { useState } from "react";
 import Timer from "./Timer";
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, getDocs } from "firebase/firestore";
-import { doc, setDoc } from "firebase/firestore";
-
+import { db } from "./firebase";
 
 const ImageComponent = (props) => {
   const { img_src, isRunning, setIsRunning } = props; // local image first
 
   const [clickPos, setClickPos] = useState([0, 0]);
   const [foundItems, setFoundItems] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const [userName, setUserName] = useState("Anony.");
+  const [upload, setUpload] = useState(false);
 
   // console.log(process.env.REACT_APP_FIREBASE_API_KEY);
 
-  const firebaseConfig = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
-    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
-  };
-
-  
+  // const firebaseConfig = {
+  //   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  //   authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  //   databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  //   projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  //   storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  //   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  //   appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  //   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  // };
 
   // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  // const analytics = getAnalytics(app);
-  const db = getFirestore(app);
+  // const app = initializeApp(firebaseConfig);
+  // // const analytics = getAnalytics(app);
+  // const db = getFirestore(app);
 
   // Get a list of cities from your database
   async function getLoc(db) {
@@ -55,8 +55,8 @@ const ImageComponent = (props) => {
     // get the name selection button column
     const selectCol = document.querySelector(".selectNameCol");
     selectCol.style.display = "flex";
-    selectCol.style.top = (clickY - imgRefY) + "px";
-    selectCol.style.left = (clickX - imgRefX) + "px";
+    selectCol.style.top = clickY - imgRefY + "px";
+    selectCol.style.left = clickX - imgRefX + "px";
     setClickPos([scaleX, scaleY]);
   };
 
@@ -69,7 +69,7 @@ const ImageComponent = (props) => {
 
   const checkInBound = async (clickPoint, charName, clickedBtn) => {
     const locList = await getLoc(db);
-  
+
     // console.log(locList);
     const item = locList.find((el) => el.name === charName);
     // console.log(item.pos);
@@ -110,15 +110,45 @@ const ImageComponent = (props) => {
     });
   };
 
+  const getUserName = () => {
+    const userNameInput = document.querySelector("#user-name");
+    const user_name = userNameInput.value;
+    setUserName(user_name);
+    setUpload(true);
+    const submitButton = document.getElementById("submit-user");
+    submitButton.classList.add("loading");
+  };
+
   return (
     <div className="image-container">
-      <Timer className='timer' foundItems={foundItems} db={db} isRunning={isRunning} setIsRunning={setIsRunning}/>
+      <Timer
+        className="timer"
+        foundItems={foundItems}
+        db={db}
+        isRunning={isRunning}
+        setIsRunning={setIsRunning}
+        elapsedTime={elapsedTime}
+        setElapsedTime={setElapsedTime}
+        userName={userName}
+        upload={upload}
+      />
+      <div className="enter-name">
+        <p>Congrats! You found all characters in {elapsedTime} seconds 😊</p>
+        <input
+          type="text"
+          name="user-name"
+          id="user-name"
+          placeholder="Anonymous"
+        />
+        <button id="submit-user" onClick={getUserName}>
+          Submit your records!
+        </button>
+      </div>
       <img
         src={process.env.PUBLIC_URL + img_src}
         alt="game image"
         onClick={clickCoord}
       />
-
       <ul className="selectNameCol">
         <li>
           <button onClick={checkChar}>Whity</button>
