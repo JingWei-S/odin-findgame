@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/odin-findgame/static/css/main.412ffc1c.css",
+    "main.css": "/odin-findgame/static/css/main.7569bdba.css",
     "main.js": "/odin-findgame/static/js/main.ad815a8c.js",
     "static/js/787.7255bad6.chunk.js": "/odin-findgame/static/js/787.7255bad6.chunk.js",
     "index.html": "/odin-findgame/index.html",
-    "main.412ffc1c.css.map": "/odin-findgame/static/css/main.412ffc1c.css.map",
+    "main.7569bdba.css.map": "/odin-findgame/static/css/main.7569bdba.css.map",
     "main.ad815a8c.js.map": "/odin-findgame/static/js/main.ad815a8c.js.map",
     "787.7255bad6.chunk.js.map": "/odin-findgame/static/js/787.7255bad6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.412ffc1c.css",
+    "static/css/main.7569bdba.css",
     "static/js/main.ad815a8c.js"
   ]
 }
