@@ -9,6 +9,9 @@ function App() {
     <div className="App">
       <Bar/>
       <GamePage img_src={"/img/game_img.jpeg"} />
+      <footer className="footer">
+      <p>© 2023 Find Game. All rights reserved.</p>
+    </footer>
     </div>
   );
 }
