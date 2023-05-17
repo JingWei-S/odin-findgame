@@ -237,7 +237,7 @@ li>button {
   background-color: #f5f5f5;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  position: absolute; /* Position the div */
+  position: fixed; /* Position the div */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
